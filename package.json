@@ -10,7 +10,15 @@
     "dev:ssr": "ng run prueba-tecnica20250610:serve-ssr",
     "serve:ssr": "node dist/prueba-tecnica20250610/server/main.js",
     "build:ssr": "ng build && ng run prueba-tecnica20250610:server",
-    "prerender": "ng run prueba-tecnica20250610:prerender"
+    "build:ssr:prod": "ng build --configuration production && ng run prueba-tecnica20250610:server:production",
+    "docker:build": "docker build -t wuxiacode/prueba-tecnica20250610:dev .",
+    "docker:build:prod": "docker build --file Dockerfile.prod -t wuxiacode/prueba-tecnica20250610:prod .",
+    "docker:push": "docker push wuxiacode/prueba-tecnica20250610:dev",
+    "docker:push:prod": "docker push wuxiacode/prueba-tecnica20250610:prod",
+    "docker:start": "docker run -p 4000:4000 wuxiacode/prueba-tecnica20250610:dev",
+    "docker:start:prod": "docker run -p 4000:4000 wuxiacode/prueba-tecnica20250610:prod",
+    "prerender": "ng run wuxiacode/prueba-tecnica20250610:prerender",
+    "prerender:prod": "npm run build&&ng run wuxiacode/prueba-tecnica20250610:prerender:production"
   },
   "private": true,
   "dependencies": {
