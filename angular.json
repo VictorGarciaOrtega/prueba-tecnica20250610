@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/prueba-tecnica20250610",
+            "outputPath": "dist/prueba-tecnica20250610/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -91,6 +91,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/prueba-tecnica20250610/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "prueba-tecnica20250610:build:development",
+              "serverTarget": "prueba-tecnica20250610:server:development"
+            },
+            "production": {
+              "browserTarget": "prueba-tecnica20250610:build:production",
+              "serverTarget": "prueba-tecnica20250610:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "prueba-tecnica20250610:build:production",
+              "serverTarget": "prueba-tecnica20250610:server:production"
+            },
+            "development": {
+              "browserTarget": "prueba-tecnica20250610:build:development",
+              "serverTarget": "prueba-tecnica20250610:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
