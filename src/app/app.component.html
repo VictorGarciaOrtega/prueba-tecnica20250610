@@ -1,0 +1,33 @@
+<main class="main-container">
+  <section class="section-container">
+    <div class="main-text-container text-center">
+      <img src="../assets/images/persons.svg" alt="Imagen de bienvenida" width="300" height="auto" loading="lazy">
+      <h1 class="text-xxl font-bolder">¡Te damos la bienvenida a Banco Azteca!</h1>
+      <p class="text-normal semi-bold">Usa tu préstamo como dinero enefectivo o compra en donde quieras.</p>
+    </div>
+
+    <form #form="ngForm" method="post">
+      <div class="input-container">
+        <label class="text-normal" for="nombre">¿Cómo prefieres que te llamemos?</label>
+        <input class="input" type="text" id="nombre" name="nombre" [(ngModel)]="nombre" placeholder="Escribe tu nombre"
+          autocomplete="off" pattern="^[a-zA-Z\s]{0,15}$" #nombreInput="ngModel" maxlength="15" readonly required />
+        <span class="text-end semi-bold ">{{nombre.length}}/15 caracteres</span>
+      </div>
+      <div *ngIf="nombreInput.invalid && nombreInput.touched" style="color: red;">
+        <div *ngIf="nombreInput.errors?.['required']">El nombre es obligatorio.</div>
+        <div *ngIf="nombreInput.errors?.['pattern']">
+          Solo se permiten letras y espacios.
+        </div>
+      </div>
+      <div class="buttons-container">
+        <button class="button" type="submit" (click)="codificarNombre()"
+          [disabled]="this.nombre.trim() === '' || nombreInput.invalid">Comenzar</button>
+        <button class="buttons-icon" (click)="!voiceService.isListening ? voiceService.start() : voiceService.stop()">
+          <img [src]="!voiceService.isListening ? '../assets/icons/mic.svg' : '../assets/icons/stop.svg'" width="24"
+            height="auto" loading="eager" alt="Microphone icon"></button>
+      </div>
+    </form>
+
+    <div *ngIf="textEncode && textEncode !== ''" class="long-text">{{textEncode}}</div>
+  </section>
+</main>

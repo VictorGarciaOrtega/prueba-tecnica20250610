@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Dockerization
+
+First you need to config your username in package.json commands.
+
+To build the docker container run `npm run docker:build` or `npm run docker:build:prod` for production.
+
+To push the docker container run `npm run docker:push` or `npm run docker:push:prod` for production.
+
+To start the docker container run `npm run docker:start` or `npm run docker:start:prod` for production.
+
+> [!IMPORTANT]
+> The private key is in the file private_key.pem
